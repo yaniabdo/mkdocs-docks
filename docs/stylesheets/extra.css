@@ -1,0 +1,10 @@
+.md-button {
+    padding: 0.6rem 1.2rem;
+    border: 1px solid var(--md-primary-fg-color);
+}
+
+.md-button--primary {
+    background-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+    border-radius: 4px;
+}

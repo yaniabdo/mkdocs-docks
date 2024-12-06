@@ -1,0 +1,74 @@
+# mkdocs.yml
+site_name: AWS Infrastructure Documentation
+theme:
+  name: material
+  palette:
+    primary: deep-purple
+    accent: deep-purple
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - search.highlight
+    - header.autohide
+
+nav:
+  - Home: index.md
+  - OnBoarding: onboarding/index.md
+  - Infrastructure:
+      - Overview: infrastructure/index.md
+      - VPC Cloud: infrastructure/vpc-cloud.md
+  - Provision & Build: provision/index.md
+  - Connect & Test: connect/index.md
+  - Integration: integration/index.md
+  - Operating Guide: operations/index.md
+  - Changelog: changelog.md
+  - Projects: projects.md
+
+plugins:
+  - search
+# mkdocs.yml
+site_name: AWS Infrastructure Documentation
+theme:
+  name: material
+  palette:
+    primary: deep-purple
+    accent: deep-purple
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - search.highlight
+    - header.autohide
+
+nav:
+  - Home: index.md
+  - OnBoarding: onboarding/index.md
+  - Infrastructure: infrastructure/index.md
+  - Provision & Build: provision/index.md
+  - Connect & Test: connect/index.md
+  - Integration: integration/index.md
+  - Operating Guide: operations/index.md
+  - Changelog: changelog.md
+  - Projects: projects.md
+
+plugins:
+  - search
+theme:
+  name: material
+  font:
+    text: Roboto
+    code: Roboto Mono
+  palette:
+    scheme: default
+  features:
+    - navigation.instant
+    - navigation.tracking
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
