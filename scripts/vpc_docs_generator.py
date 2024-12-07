@@ -45,33 +45,59 @@ def get_vpc_info(session, region):
    return vpc_info
 
 def generate_markdown(accounts_data):
-   """Generate markdown documentation"""
-   content = "# AWS VPC Configuration\n\n"
-   content += f"Last updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n"
-   
-   for account in accounts_data:
-       content += f"## Project: {account['name']}\n\n"
-       
-       for env in account['environments']:
-           content += f"### Environment: {env}\n\n"
-           if 'vpcs' in account and env in account['vpcs']:
-               for region, vpcs in account['vpcs'][env].items():
-                   for vpc in vpcs:
-                       content += f"#### VPC: {vpc['name']} ({region})\n\n"
-                       content += f"* **VPC ID**: {vpc['id']}\n"
-                       content += f"* **CIDR Block**: {vpc['cidr']}\n\n"
-                       
-                       if vpc['subnets']:
-                           content += "##### Subnets\n\n"
-                           content += "| Name | CIDR | Availability Zone |\n"
-                           content += "|------|------|------------------|\n"
-                           for subnet in vpc['subnets']:
-                               content += f"| {subnet['name']} | {subnet['cidr']} | {subnet['az']} |\n"
-                           content += "\n"
-           else:
-               content += "No VPCs found for this environment\n\n"
-   
-   return content
+    """Generate markdown documentation with enhanced styling"""
+    content = """# AWS VPC Configuration
+
+!!! info "Last Updated"
+    **{timestamp}**
+
+""".format(timestamp=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+
+    for account in accounts_data:
+        content += f"""## Project: {account['name']}
+
+!!! abstract "Infrastructure Overview"
+    Network architecture for {account['name']} project
+        
+"""
+        for env in account['environments']:
+            content += f"""### Environment: {env}
+
+!!! example "Network Details"
+
+"""
+            if 'vpcs' in account and env in account['vpcs']:
+                # Add Mermaid diagram for VPC structure
+                content += "```mermaid\ngraph TB\n"
+                for region, vpcs in account['vpcs'][env].items():
+                    for vpc in vpcs:
+                        content += f"    {vpc['id']}[{vpc['name']}<br/>{vpc['cidr']}]\n"
+                        for subnet in vpc['subnets']:
+                            subnet_id = subnet['name'].replace('-', '_')
+                            content += f"    {vpc['id']} --> {subnet_id}[{subnet['name']}<br/>{subnet['cidr']}]\n"
+                content += "```\n\n"
+
+                for region, vpcs in account['vpcs'][env].items():
+                    for vpc in vpcs:
+                        content += f"""#### VPC: {vpc['name']} ({region})
+
+!!! info "VPC Details"
+    - **VPC ID**: `{vpc['id']}`
+    - **CIDR Block**: `{vpc['cidr']}`
+
+"""
+                        if vpc['subnets']:
+                            content += "##### Subnets\n\n"
+                            content += """| Name | CIDR | Availability Zone |
+|:-----|:-----|:-----------------|
+"""
+                            for subnet in vpc['subnets']:
+                                content += f"| `{subnet['name']}` | `{subnet['cidr']}` | `{subnet['az']}` |\n"
+                            content += "\n"
+            else:
+                content += "No VPCs found for this environment\n\n"
+    
+    return content
 
 def main():
    config = load_config()

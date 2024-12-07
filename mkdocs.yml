@@ -1,4 +1,3 @@
-# mkdocs.yml
 site_name: AWS Infrastructure Documentation
 
 theme:
@@ -10,7 +9,27 @@ theme:
     - navigation.tabs
     - navigation.sections
     - search.highlight
-    - header.autohide
+    - content.tabs.link
+    - content.code.copy
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
 
 nav:
   - Home: index.md
@@ -24,6 +43,3 @@ nav:
   - Operating Guide: operations/index.md
   - Changelog: changelog.md
   - Projects: projects.md
-
-plugins:
-  - search

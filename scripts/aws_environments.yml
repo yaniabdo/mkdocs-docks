@@ -3,3 +3,4 @@ accounts:
     account_id: "442042524934"
     environments:
       - argenta-uat
+      - argenta-sdb
