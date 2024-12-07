@@ -16,7 +16,7 @@ nav:
   - OnBoarding: onboarding/index.md
   - Infrastructure:
       - Overview: infrastructure/index.md
-      - VPC Cloud: infrastructure/vpc-cloud.md
+      - VPC Configuration: infrastructure/vpc-cloud.md
   - Provision & Build: provision/index.md
   - Connect & Test: connect/index.md
   - Integration: integration/index.md
