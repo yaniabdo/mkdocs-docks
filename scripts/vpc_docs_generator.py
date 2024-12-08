@@ -4,8 +4,8 @@ import os
 from datetime import datetime
 
 # Define base paths
-BASE_DIR = '/home/ec2-user/mkdocs-vpc'
-CONFIG_PATH = os.path.join(BASE_DIR, 'scripts/aws_environments.yml')
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CONFIG_PATH = os.path.join(BASE_DIR, 'config/aws_environments.yml')
 OUTPUT_PATH = os.path.join(BASE_DIR, 'docs/infrastructure/vpc-cloud.md')
 
 def load_config():
